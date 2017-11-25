@@ -49,3 +49,38 @@ def pets_by_breed(pet_shop, breed)
   return same_breed_array
 
 end
+
+def find_pet_by_name(pet_shop, pet_name)
+  #return pet hash if parameter pet_name matches a pet name in pets array
+
+  pets = pet_shop[:pets]
+  for pet in pets
+    if pet[:name] == pet_name
+      return pet
+    end
+  end
+  # if no pet match found return nil
+  return nil
+end
+
+def add_pet_to_stock(pet_shop, new_pet)
+  #adds new pet hash to pets array
+  pets = pet_shop[:pets]
+  pets.push(new_pet)
+
+end
+
+def customer_pet_count(customer)
+  # Input parameter is a customer hash within a customers array
+  # Function to count the number of pets within a pets array in the customer hash
+
+  return cust_pet_count = customer[:pets].count()
+
+end
+
+def add_pet_to_customer(customer, new_pet)
+  # Input parameter 1: customer hash within a customers array
+  # Input parameter 2: new pet hash
+  # Function to add a new pet to the pets array for that customer hash
+  customer[:pets].push(new_pet)
+end
