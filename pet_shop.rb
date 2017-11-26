@@ -77,7 +77,6 @@ def add_pet_to_stock(pet_shop, new_pet)
   #adds new pet hash to pets array
   pets = pet_shop[:pets]
   pets.push(new_pet)
-
 end
 
 def customer_pet_count(customer)
@@ -99,49 +98,36 @@ def customer_can_afford_pet(customer, pet_wanted)
 
   customer_cash = customer[:cash]
 
-  pets = @pet_shop[:pets]
-    p "rb:pets - #{pets}"
-    p "pet_wanted #{pet_wanted}"
-
-
-    for pet in pets
-    if pet == pet_wanted
-      p pet
-      p pet_wanted
-      p pet[:price]
-      if customer_cash >= pet[:price]
-        return true
-      else
-        return false
-      end
-    else
-      p "pet doesn't exist"
-      return false
-    end
+  if customer_cash >= pet_wanted[:price]
+    return true
+  else
+    return false
   end
-  p "rb:pets - #{pets}"
-
 
 end
 
-# def sell_pet_to_customer(pet_shop, pet, customer)
-#   # This function calls 3 functions:
-#   # 1. Adds pet to the customer
-#   # 2. Increases by 1 the admin[:pets_sold] value in the pet_shop hash
-#   # 3. Updates the admin[:total_cash] value with the price of the pet_type
-#   #pet = find_pet_by_name(pet_shop, pet)
-#   #p pet[:name]
-#   #if pet == pet[:name]
-#   #return if nil
+def sell_pet_to_customer(pet_shop, pet, customer)
+  # This functions receives 3 parameters:
+  # Input 1: pet_shop hash
+  # Input 2: pet hash
+  # Input 3: customer hash
+  #
+  # This function calls 3 functions:
+  # 1. Adds pet to the customer
+  # 2. Increases by 1 the admin[:pets_sold] value in the pet_shop hash
+  # 3. Updates the admin[:total_cash] value with the price of the pet_type
+  #pet = find_pet_by_name(pet_shop, pet)
 
-# #  if pet[:name] == pet
-#     customer_can_afford_pet = customer_can_afford_pet(customer, pet)
-#     p customer_can_afford_pet
-#     if (customer_can_afford_pet)
-#       add_pet_to_customer(customer, pet)
-#       increase_pets_sold(pet_shop, 1)
-#       add_or_remove_cash(pet_shop, pet[:price])
-#     end
-# #  end
-#
-# end
+  if pet == nil
+    return
+  end
+
+  customer_can_afford_pet = customer_can_afford_pet(customer, pet)
+
+  if (customer_can_afford_pet)
+    add_pet_to_customer(customer, pet)
+    increase_pets_sold(pet_shop, 1)
+    add_or_remove_cash(pet_shop, pet[:price])
+  end
+
+end
